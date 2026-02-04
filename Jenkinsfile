@@ -40,9 +40,9 @@ pipeline {
                     steps {
                         bat """
                             chcp 65001
-                            @call vrunner loadrepo --storage-name ${env.rep} --storage-user ${env.VATest2} --ibconnection /Slocalhost/${env.base} --db-user Админ
-                            @call vrunner updatedb --ibconnection /Slocalhost/${env.base} --db-user Админ
-                            @call vrunner unload "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --db-user Админ
+                            @call vrunner loadrepo --storage-name ${env.rep} --storage-user ${env.VATest2} --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ
+                            @call vrunner updatedb --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ
+                            @call vrunner unload "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ
                         """
                     }
                 }
@@ -68,7 +68,7 @@ pipeline {
                     steps {
                         bat """
                             chcp 65001
-                            @call vrunner compare --secondFile "${env.workDir}\\old\\${params.oldversion}.cf" --reportFile "${env.workDir}\\Отчет.txt" --reportType Brief --firstFile "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --db-user Админ
+                            @call vrunner compare --secondFile "${env.workDir}\\old\\${params.oldversion}.cf" --reportFile "${env.workDir}\\Отчет.txt" --reportType Brief --firstFile "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ
                         """
                     }
                 }
@@ -76,7 +76,7 @@ pipeline {
                     steps {
                         bat """
                             chcp 65001
-                            @call vrunner decompile --out ${env.workDir}\\xml_new --in "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --db-user Админ 
+                            @call vrunner decompile --out ${env.workDir}\\xml_new --in "${env.workDir}\\new\\${params.newversion}.cf" --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ 
                         """
                     }
                 }
@@ -84,7 +84,7 @@ pipeline {
                     steps {
                         bat """
                             chcp 65001
-                            @call vrunner decompile --out ${env.workDir}\\xml_old --in "${env.workDir}\\old\\${params.oldversion}.cf" --ibconnection /Slocalhost/${env.base} --db-user Админ 
+                            @call vrunner decompile --out ${env.workDir}\\xml_old --in "${env.workDir}\\old\\${params.oldversion}.cf" --ibconnection /Slocalhost/${env.base} --v8version "${env.VERSION_PLATFORM}" --db-user Админ 
                         """
                     }
                 }
