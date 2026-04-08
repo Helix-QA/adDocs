@@ -1,8 +1,7 @@
 pipeline {
     agent { label "OneS" }
     environment {
-        workDir = "D:\\addocs"
-        rootDir = "D:\\ДЛЯ РЕЛИЗОВ\\work\\Данные конфигураций"
+        workDir = "D:\\addocs"    
     }
     stages {
         stage('Подготовка .cf') {
@@ -10,17 +9,17 @@ pipeline {
                 script {
                     if (params.product == 'Fitness') {
                         env.base = "VAFitness"
-                        env.dir = "${env.rootDir}\\Фитнес клуб КОРП 4.0\\cf"
+                        env.dir = "D:\\РЕЛИЗЫ\\Фитнес клуб КОРП\\cf"
                         env.rep = "${repositoryReleaseFitness}"
                         env.nameFile = "1С_Фитнес клуб КОРП. Сборка ${params.newversion}. Изменения и дополнения к документации.htm"
                     } else if (params.product == 'Salon') {
                         env.base = "VASPA"
-                        env.dir = "${env.rootDir}\\SPA-Салон 3.0"
+                        env.dir = "D:\\РЕЛИЗЫ\\Салон красоты\\cf"
                         env.rep = "${repositoryReleaseSalon}"
                         env.nameFile = "1С_Салон красоты. Сборка ${params.newversion}. Изменения и дополнения к документации"
                     } else {
                         env.base = "VAStoma"
-                        env.dir = "${env.rootDir}\\1С_Стоматология 2.1\\CF"
+                        env.dir = "D:\\РЕЛИЗЫ\\Стоматология\\cf"
                         env.rep = "${repositoryReleaseStom}"
                         env.nameFile = "1С_Медицина. Стоматологическая клиника. Сборка ${params.newversion}. Изменения и дополнения к документации.htm"
                     }
